@@ -1,29 +1,20 @@
 class Solution {
+    String max = "";
     public String longestPalindrome(String s) {
-        String res = "";
-        
         for (int i=0;i<s.length();i++) {
-            //odd
-            int l=i,r=i;
-            while (l>=0 && r<s.length() && s.charAt(l) == s.charAt(r) ) {
-                if ( s.substring(l,r+1).length() > res.length() )
-                    res = s.substring(l,r+1);
-                l--;
-                r++;
-            }
-            
-            //even
-            l=i;
-            r=i+1;
-            
-            while (l>=0 && r<s.length() && s.charAt(l) == s.charAt(r) ) {
-                if ( s.substring(l,r+1).length() > res.length() )
-                    res = s.substring(l,r+1);
-                l--;
-                r++;
-            }
+            dfs(s,i,i);
+            dfs(s,i,i+1);
         }
-        
-        return res;
+        return max;
+    }
+    void dfs(String s, int i, int j) {
+        while (i>=0 && j<s.length() && s.charAt(i) == s.charAt(j)) 
+        {
+            if ( s.substring(i,j+1).length() > max.length() )
+                max = s.substring(i,j+1);
+            i--;
+            j++;
+        }
+
     }
 }
