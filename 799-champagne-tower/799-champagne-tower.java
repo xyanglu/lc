@@ -3,7 +3,7 @@ class Solution {
         double[][] dp = new double[query_row+2][query_row+2];
         dp[0][0] = poured;
         
-        for (int i=0;i<query_row+1;i++)
+        for (int i=0;i<=query_row;i++)
             for (int j=0;j<=i;j++)
             {
                 if ( dp[i][j] > 1 ) {
@@ -13,8 +13,7 @@ class Solution {
                     dp[i][j] = 1;
                 }
             }
-        
-        
+              
         return dp[query_row][query_glass];
     }
 }
