@@ -1,18 +1,19 @@
 class Solution {
     public int arrangeCoins(int n) {
-        int lo = 1, hi = n;
-        int max = 0;
+        if ( n < 3 ) return 1;
+        if ( n < 4 ) return 2;
         
+        long lo = 2, hi = n/2; 
         while ( lo <= hi ) {
-            int m = lo + (hi-lo)/2;
-            if ( (int) m/2.0 * (m + 1)  > n )
+            long m = lo + (hi-lo)/2;
+            long val = m * (m + 1)/2 ;
+            if ( val > n )
                 hi = m - 1;
-            else {
+            else if ( val == n ) return (int) m;
+            else 
                 lo = m + 1;
-                max = Math.max(m,max);
-            }
         }
         
-        return max;
+        return (int) hi;
     }
 }
