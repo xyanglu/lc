@@ -3,7 +3,7 @@ class Solution {
         if ( n < 3 ) return 1;
         if ( n < 4 ) return 2;
         
-        long lo = 2, hi = n/2; 
+        long lo = 0, hi = n; 
         while ( lo <= hi ) {
             long m = lo + (hi-lo)/2;
             long val = m * (m + 1)/2 ;
