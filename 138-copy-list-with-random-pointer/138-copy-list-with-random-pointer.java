@@ -17,7 +17,8 @@ class Solution {
     Map<Node,Node> map = new HashMap();
     public Node copyRandomList(Node head) {
         if ( head == null ) return null;
-        
+                copyRandomList(head.next);
+
         Node node = null;
         if ( map.containsKey(head)) 
             node = map.get(head);
@@ -26,8 +27,7 @@ class Solution {
             node = new Node(head.val);
             map.put(head,node);
         }
-        
-        
+          
         Node next = null;
         if ( head.next!=null) {
             if (map.containsKey(head.next) )
@@ -48,10 +48,7 @@ class Solution {
                 map.put(head.random,random);
             }
         }
-        node.random = random;
-        
-        copyRandomList(head.next);
-        
+        node.random = random;        
         return node;
     }
 }
