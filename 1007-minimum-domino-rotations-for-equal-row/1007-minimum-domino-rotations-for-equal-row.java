@@ -13,18 +13,14 @@ class Solution {
             bot.put(b[i],bot.getOrDefault(b[i],0)+1);
         }
         
-        int min = -1;
+        int min = Integer.MAX_VALUE;
         for (int i=1;i<=6;i++) {
             int T = top.getOrDefault(i,0);
             int B = bot.getOrDefault(i,0);
             
-            if ( free[i] + T + B >= t.length ) {
-                if ( min == -1 ) 
-                    min = t.length - free[i] - Math.max(T,B);
-                else
-                    min = Math.min(min, t.length - free[i] - Math.max(T,B));
-            }
+            if ( free[i] + T + B >= t.length ) 
+                min = Math.min(min, t.length - free[i] - Math.max(T,B));
         }
-        return min;
+        return min == Integer.MAX_VALUE ? - 1 : min;
     }
 }
