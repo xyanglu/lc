@@ -13,15 +13,14 @@ class Solution {
         
         Arrays.sort(arr,(a,b) -> a[0] == b[0] ? a[1] == b[1] ? a[2] - b[2] : a[1] - b[1] : a[0] - b[0] );
         Set<Integer> bikeSeen = new HashSet();
-        Set<Integer> workSeen = new HashSet();
         int i = 0;
         int j = 0;
         int[] rc = new int[workers.length];
+        Arrays.fill(rc,-1);
         while ( i < workers.length ) {
             int[] entry = arr[j++];
-            if ( workSeen.contains(entry[1]) ) continue;
+            if ( rc[ entry[1] ] != -1 ) continue;
             if ( bikeSeen.contains(entry[2]) ) continue;
-            workSeen.add(entry[1]);
             bikeSeen.add(entry[2]);
             rc[ entry[1] ] = entry[2]; 
             i++;
