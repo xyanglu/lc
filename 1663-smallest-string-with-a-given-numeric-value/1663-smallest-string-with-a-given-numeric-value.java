@@ -2,15 +2,10 @@ class Solution {
     public String getSmallestString(int n, int k) {
         StringBuilder sb = new StringBuilder();
 
-        while ( k > n ) {
-            char c = (char) ( Math.min(26, k-n+1) - 1 + 'a');
+        while ( k > 0) {
+            char c = (char) ( Math.min(25, k-n) + 'a');
             sb.append(c);
             k -= c - 'a' + 1;
-            n--;
-        }
-        
-        while ( n > 0 ) {
-            sb.append('a');
             n--;
         }
         
