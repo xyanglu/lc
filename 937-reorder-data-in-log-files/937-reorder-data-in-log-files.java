@@ -18,10 +18,12 @@ class Solution {
             StringBuilder as = new StringBuilder();
             for ( int i=1;i<A.length;i++)
                 as.append(A[i] + " ");
+            as.deleteCharAt(as.length()-1);
             
             StringBuilder bs = new StringBuilder();
             for ( int i=1;i<B.length;i++)
                 bs.append(B[i] + " ");
+            bs.deleteCharAt(bs.length()-1);
             
             int val = as.compareTo(bs);
             System.out.println( as + " "+bs+" "+val);
