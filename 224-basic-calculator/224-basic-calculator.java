@@ -20,6 +20,7 @@ class Solution {
                 stack.add(sign);
                 sign = 1;
                 output = 0;
+                cur = 0;
             }
             else if ( c == ')') {
                 output += sign*cur;
