@@ -16,11 +16,11 @@ class Solution {
                 sign = -1;
             }
             else if ( c == '(') {
+                output += cur*sign;
                 stack.add(output);
                 stack.add(sign);
                 sign = 1;
                 output = 0;
-                cur = 0;
             }
             else if ( c == ')') {
                 output += sign*cur;
