@@ -18,7 +18,6 @@ class Solution {
             st.append( map.get(c) + " " );
         }
         
-        System.out.println( ss.toString() + " " + st.toString() );
         return ss.toString().equals(st.toString());
     }
 }
