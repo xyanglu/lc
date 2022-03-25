@@ -14,33 +14,33 @@
  * }
  */
 class Solution {
-    Map<Integer,Map<Integer,List<Integer>>> map = new TreeMap();
     public List<List<Integer>> verticalTraversal(TreeNode root) {
         List<List<Integer>> list = new ArrayList();
-        dfs(root,0,0);
+        Queue<Pair<Integer,TreeNode>> queue = new PriorityQueue<>( (a,b) -> a.getKey() == b.getKey() ? a.getValue().val - b.getValue().val : a.getKey() - b.getKey() );
+        queue.add(new Pair<Integer,TreeNode>(0,root));
         
-        for ( Map<Integer,List<Integer>> m : map.values() )
-        {
-            list.add( new ArrayList());
-            for ( List<Integer> l : m.values() ) {
-                Collections.sort(l);
-                list.get(list.size()-1).addAll(l);
+        Map<Integer,List<Integer>> map = new TreeMap();
+        while ( !queue.isEmpty() ) {
+            Queue<Pair<Integer,TreeNode>> newQueue = new PriorityQueue<>( (a,b) -> a.getKey() == b.getKey() ? a.getValue().val - b.getValue().val : a.getKey() - b.getKey() );
+            while ( !queue.isEmpty() ) {
+                Pair<Integer,TreeNode> p = queue.poll();
+                int v = p.getKey();
+                root = p.getValue();
+                if ( !map.containsKey(v) )
+                    map.put(v,new ArrayList());
+                map.get(v).add(root.val);
+                if ( root.left != null )
+                    newQueue.add(new Pair<Integer,TreeNode>(v-1,root.left));
+                if ( root.right != null )
+                    newQueue.add(new Pair<Integer,TreeNode>(v+1,root.right));
             }
+            queue = newQueue;
         }
         
+        for ( List<Integer> l : map.values() ) 
+            list.add(l);
+        
+        
         return list;
-    }
-    void dfs(TreeNode root, int x, int y) {
-        if ( root == null ) return;
-        
-        if ( !map.containsKey(x) )
-            map.put(x,new TreeMap());
-        if ( !map.get(x).containsKey(y) )
-            map.get(x).put(y, new ArrayList());
-
-        map.get(x).get(y).add(root.val);
-        
-        dfs(root.left,x-1,y+1);
-        dfs(root.right,x+1,y+1);
     }
 }
