@@ -13,7 +13,7 @@ class Solution {
             else
                 l = mid+1;
         }
-        return r;
+        return l;
     }
     boolean split(int[] nums, int size, int m) {
         int buckets = 1;
