@@ -1,10 +1,12 @@
 class Solution {
     public void reverseString(char[] s) {
-        for (int i=0;i<s.length/2;i++)
-        {
-            char temp = s[i];
-            s[i] = s[ s.length - 1 - i];
-            s[s.length-1-i] = temp;
-        }
+        rev(s,0,s.length-1);
+    }
+    void rev(char[] s, int l, int r) {
+        if ( l > r ) return;
+        char c = s[l];
+        s[l] = s[r];
+        s[r] = c;
+        rev(s,l+1,r-1);
     }
 }
