@@ -3,7 +3,7 @@ class Solution {
         rev(s,0,s.length-1);
     }
     void rev(char[] s, int l, int r) {
-        if ( l > r ) return;
+        if ( l >= r ) return;
         char c = s[l];
         s[l] = s[r];
         s[r] = c;
