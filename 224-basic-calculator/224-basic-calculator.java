@@ -33,9 +33,7 @@ class Solution {
                 cur = 0;
                 output*=stack.pop();
                 output += stack.pop();
-            }
-            System.out.println(c + " "+output);
-                
+            }                
         }
         
         
