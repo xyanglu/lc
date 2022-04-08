@@ -8,7 +8,6 @@ class KthLargest {
     //       2
     //
     
-    Queue<Integer> leftQueue = new PriorityQueue<>( (a,b) -> b - a );
     Queue<Integer> rightQueue = new PriorityQueue<>();
     int k = 0;
     
