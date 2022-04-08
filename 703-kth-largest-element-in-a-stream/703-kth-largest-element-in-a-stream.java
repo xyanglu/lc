@@ -17,13 +17,13 @@ class KthLargest {
         for (int n : nums)
             rightQueue.add(n);
         while ( !rightQueue.isEmpty() && rightQueue.size() > k )
-            leftQueue.add(rightQueue.poll());
+            rightQueue.poll();
     }
     
     public int add(int val) {
         rightQueue.add(val);
         if ( rightQueue.size() > k ) 
-            leftQueue.add( rightQueue.poll());
+            rightQueue.poll();
         return rightQueue.peek();
         
     }
