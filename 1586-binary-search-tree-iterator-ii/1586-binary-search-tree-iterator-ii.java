@@ -39,7 +39,7 @@ class BSTIterator {
     }
     
     public boolean hasPrev() {
-        return !prev.isEmpty() && prev.size() > 1;
+        return prev.size() > 1;
     }
     
     public int prev() {
