@@ -4,8 +4,10 @@ class Solution {
         int size = (int) Math.pow(2,k);
         Set<String> set = new HashSet();
         
-        for (int i=0;i+k<=s.length();i++)
+        for (int i=0;i+k<=s.length();i++) {
             set.add( s.substring(i,i+k));
+            if ( set.size() == size ) return true;
+        }
         
         return set.size() == size;
     }
