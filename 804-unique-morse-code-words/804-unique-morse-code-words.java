@@ -11,7 +11,7 @@ class Solution {
             StringBuilder temp = new StringBuilder();
             for ( char c : word.toCharArray() )
                 temp.append( map.get(c) );
-            System.out.println(word+"\t"+temp.toString());
+            //System.out.println(word+"\t"+temp.toString());
             set.add(temp.toString());
         }
         
