@@ -12,23 +12,16 @@ class Solution {
             rc = sum;
         
         for (int i=k;i<nums.length;i++) {
-                   // System.out.println(nums[i-k]);
-            //System.out.println(map);
             sum -= nums[i-k];
             map.put(nums[i-k],map.get(nums[i-k])-1);
             if ( map.get(nums[i-k]) == 0)
                 map.remove(nums[i-k]);
             
             sum += nums[i];
-            //System.out.println(sum);
             map.put(nums[i],map.getOrDefault(nums[i],0)+1);
             if ( map.size() == k )
                 rc = Math.max(rc, sum);
-
         }
-        
-        
-        
         return rc;
     }
 }
