@@ -26,7 +26,7 @@ class Solution {
                 head = null;
         }
         while ( even != null ) {
-            System.out.println(even.val);
+            //System.out.println(even.val);
             queue.add(even);
            if ( even.next != null)
                 even = even.next.next;
