@@ -24,12 +24,11 @@ class Solution {
         // Color all uncolored adjacent nodes.
         for (Integer adjacentNode : graph[currNode]) {
 
-            if (colors[adjacentNode] == null) {
-                if (!dfs(graph, colors, adjacentNode, currColor * -1)) return false;     
-
-            } else if (colors[adjacentNode] == currColor) {
-                return false;                                     
-            }
+            if (colors[adjacentNode] != null && colors[adjacentNode] == currColor) 
+                return false;   
+            
+            if (colors[adjacentNode] == null) 
+                if (!dfs(graph, colors, adjacentNode, currColor * -1))                          return false;     
         }
         return true;        
     }
