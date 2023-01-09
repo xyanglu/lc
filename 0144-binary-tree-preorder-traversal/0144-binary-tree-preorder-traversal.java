@@ -25,7 +25,7 @@ class Solution {
         {
             root = queue.poll();
                     Queue<TreeNode> newQueue = new LinkedList(queue);
-            queue = new LinkedList();
+            queue.clear();
             list.add(root.val);
             if ( root.left!=null)
                 queue.add(root.left);
