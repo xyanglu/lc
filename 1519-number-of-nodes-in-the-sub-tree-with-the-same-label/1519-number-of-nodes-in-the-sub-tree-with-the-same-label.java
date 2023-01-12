@@ -11,10 +11,11 @@ class Solution {
             map.get(e[1]).add(e[0]);
         }
             
+        int[] temp = dfs(0,map,labels, new HashSet());
+
         for (int i=0;i<n;i++)
         {
-            int[] temp = dfs(i,map,labels, new HashSet());
-            rc[i] = temp[labels.charAt(i)-'a'];
+            rc[i] = cache.get(i)[labels.charAt(i)-'a'];
         }
             
         return rc;
