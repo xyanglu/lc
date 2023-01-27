@@ -1,23 +1,27 @@
 class Solution {
-      Set<String> set;
+    Set<String> set = new HashSet();
+    Set<String> match = new HashSet();
     public List<String> findAllConcatenatedWordsInADict(String[] words) {
-       this.set =new HashSet<>(Arrays.asList(words));
-        List<String> list = new ArrayList<>();
-        for(String word:words){
-            if(dfs(word)){
-                list.add(word);
-            }
-        }
-        return list;
+        for ( String w : words)
+            set.add(w);
+        for ( String w : words)
+            if ( dfs(w) )
+                match.add(w);
+        
+        return new ArrayList(match);
     }
-    public boolean dfs(String word){
-         for(int i=1;i<word.length();i++){
-             String pre = word.substring(0,i);
-             String suf = word.substring(i,word.length());
-             if((set.contains(pre)&&set.contains(suf)) || (set.contains(pre)&&dfs(suf))){
-                 return true;
-             }
-         }
-         return false;
+    boolean dfs(String s) {
+        for (int i=1;i<s.length();i++) {
+            String pre = s.substring(0,i);
+            String suf = s.substring(i,s.length());
+            if ( set.contains(suf) && set.contains(pre) )
+                return true;
+            if ( set.contains(suf) && dfs(pre) )
+                return true;
+            
+        }
+        return false;
+        
+        
     }
 }
