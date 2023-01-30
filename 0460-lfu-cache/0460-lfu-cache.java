@@ -61,14 +61,16 @@ class LFUCache {
 void counter(int key) {
     int cnt = countMap.getOrDefault(key,0);
     countMap.put(key,cnt+1);
+    
     if ( !listMap.containsKey(cnt) )
         listMap.put(cnt,new LinkedList());
-        listMap.get(cnt).pop(key);
+    listMap.get(cnt).pop(key);
+    
     if ( !listMap.containsKey(cnt+1) )
         listMap.put(cnt+1,new LinkedList());
     listMap.get(cnt+1).pushRight(key);
     
-    if ( listMap.containsKey(cnt) && listMap.get(cnt).length() == 0 && cnt == lfuCnt )
+    if ( listMap.get(cnt).length() == 0 && cnt == lfuCnt )
         lfuCnt++;
     
 }
@@ -84,7 +86,7 @@ void counter(int key) {
     public void put(int key, int value) {
         if ( n == 0 ) return;
         
-        if ( listMap.containsKey(lfuCnt) && !valMap.containsKey(key) && valMap.size() == n ) {
+        if ( !valMap.containsKey(key) && valMap.size() == n ) {
             int val = listMap.get(lfuCnt).popLeft();
             valMap.remove(val);
             countMap.remove(val);
