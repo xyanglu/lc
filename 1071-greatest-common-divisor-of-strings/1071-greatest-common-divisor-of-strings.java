@@ -5,14 +5,12 @@ class Solution {
             String temp = str1;
             str1 = str2;
             str2 = temp;
-        }
-        String max = "";
-        
-        for (int i=1;i<=str2.length();i++) {
+        }        
+        for (int i=str2.length();i>=1;i--) {
             String sub = str2.substring(0,i);
+            //System.out.println(sub);
             if ( str2.length() % sub.length() != 0 ) continue;
-                        if ( str1.length() % sub.length() != 0 ) continue;
-
+            if ( str1.length() % sub.length() != 0 ) continue;
             
             String temp = str2;
 
@@ -25,7 +23,6 @@ class Solution {
             if ( temp.length() != 0 )
                 continue;
             
-            
              temp = str1;
 
             while ( temp.length() >= sub.length() ) {
@@ -35,12 +32,10 @@ class Solution {
                     break;
             }
             if ( temp.length() == 0 )
-                max = sub;
+                return sub;
             
         }
         
-        
-        
-        return max;
+        return "";
     }
 }
