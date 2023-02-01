@@ -10,6 +10,7 @@ class Solution {
         
         for (int i=1;i<=str2.length();i++) {
             String sub = str2.substring(0,i);
+            if ( str2.length() % sub.length() != 0 ) continue;
             
             String temp = str2;
 
@@ -24,7 +25,6 @@ class Solution {
             
             
              temp = str1;
-            //System.out.println(sub+" "+temp);
 
             while ( temp.length() >= sub.length() ) {
                 if ( temp.startsWith(sub) )
