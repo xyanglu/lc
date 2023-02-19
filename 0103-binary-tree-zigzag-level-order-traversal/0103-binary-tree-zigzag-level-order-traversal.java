@@ -27,14 +27,15 @@ class Solution {
             List<Integer> temp = new ArrayList();
             for (int i=0;i<size;i++) {
                 root = queue.poll();
-                temp.add(root.val);
+                            if ( !even )
+                temp.add(0,root.val);
+                else
+                    temp.add(root.val);
                 if ( root.left != null )
                     queue.add(root.left);
                 if ( root.right != null )
                     queue.add(root.right);
             }
-            if ( !even )
-                Collections.reverse(temp);
             list.add(temp);
             even = !even;
         }
