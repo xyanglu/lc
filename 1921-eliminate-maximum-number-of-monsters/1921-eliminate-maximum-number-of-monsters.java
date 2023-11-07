@@ -7,7 +7,6 @@ class Solution {
             queue.add(new int[]{speed[i],dist[i]});
         
         while ( !queue.isEmpty() ) {
-        Queue<int[]> newQueue = new PriorityQueue<int[]>( (a,b) -> (1.0f*b[0])/a[0] >= (1.0f*b[1])/a[1] ? 1 : -1  );
             int p[] = queue.poll();
             // System.out.println(Arrays.toString(p));
             rc++;
