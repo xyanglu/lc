@@ -33,10 +33,10 @@ class Solution {
         
     }
     void dfs(Map<Integer,Set<Integer>> map, int i, int[] rc, int len, Set<Integer> set) {
+                    if ( set.contains(len) ) return;
         rc[i++] = len;
         set.add(len);
         for (int neigh : map.get(len ) ) {
-            if ( set.contains(neigh) ) continue;
             dfs(map,i,rc,neigh,set);
         }
         
