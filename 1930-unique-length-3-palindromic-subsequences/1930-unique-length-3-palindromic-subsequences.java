@@ -10,7 +10,7 @@ class Solution {
                         map.put(c,map.get(c)-1);
             for ( char d : seenLeft) 
             {
-                if ( match.contains(""+d+c+d) ) continue;
+                if ( map.get(d) == 0 ) continue;
                 if ( map.get(d) > 0 ) {
                     match.add(""+d+c+d);
                 }
