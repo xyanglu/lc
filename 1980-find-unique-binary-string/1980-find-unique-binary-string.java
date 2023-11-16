@@ -2,20 +2,18 @@ class Solution {
     public String findDifferentBinaryString(String[] nums) {
         int n = nums[0].length();
         
-        List<String> list = new ArrayList();
-        
-        dfs(list,0,n,"");
-        
         Set<String> set = new HashSet();
-        for (String num : nums)
-            set.add(num);
         
-        for (String s: list)
-            if ( !set.contains(s) )
-                return s;
+        dfs(set,0,n,"");
+        
+        for (String num : nums)
+            set.remove(num);
+        
+        for (String s: set)
+            return s;
         return "";
     }
-    void dfs(List<String> list, int i, int n, String s) {
+    void dfs(Set<String> list, int i, int n, String s) {
         if ( i == n ) {
             list.add(s);
             return;
