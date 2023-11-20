@@ -3,6 +3,9 @@ class Solution {
         Map<Character,Integer> map = new HashMap();
         int[] max = new int[3];
         
+        for (int i=1;i<travel.length;i++)
+            travel[i] += travel[i-1]; 
+        
         for ( int i=0;i<garbage.length;i++) {
             String g = garbage[i];
             for ( char c : g.toCharArray() )
@@ -22,8 +25,8 @@ class Solution {
             if ( c == 'M' ) m = max[0];
             if ( c == 'P' ) m = max[1];
             if ( c == 'G' ) m = max[2];
-            for (int i=0;i<m;i++)
-                rc += travel[i];
+            if ( m > 0)
+            rc += travel[m-1];
         }
         
         return rc;
