@@ -19,12 +19,8 @@ class Solution {
         
         for (int i=0;i<l.length;i++)
         {
-            int left = 0;
-            if ( i > 0 ) 
-                left = i * nums[i]  - l[i];
-            int right = 0;
-            if ( i < l.length - 1 )
-                right = r[i] - (l.length-1-i) * nums[i];
+            int           left = i * nums[i]  - l[i];
+            int right = r[i] - (l.length-1-i) * nums[i];
             rc[i] = left + right;
         }
         
