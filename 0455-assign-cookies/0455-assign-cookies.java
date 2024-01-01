@@ -12,14 +12,13 @@ class Solution {
         {
             while ( j <s.length && g[i] > s[j] )
                 j++;
-            if ( j == s.length ) return rc;
+            if ( j == s.length ) return i;
             i++;
             j++;
-            rc++;
         }
         
         
-        return rc;
+        return i;
         
     }
 }
