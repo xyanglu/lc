@@ -6,7 +6,7 @@ class Solution {
     boolean dfs(String s, int i, int st, int e) {
         if ( i == s.length() ) return st == 0;
         if ( st < 0 ) return false;
-        if ( map.containsKey(i) ) return map.get(i);
+        // if ( map.containsKey(i) ) return map.get(i);
         boolean rc = false;
         char c = s.charAt(i);
         if ( c == '(' )
