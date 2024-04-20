@@ -7,8 +7,8 @@ class Solution {
             for (int j=0;j<land[0].length;j++) 
                 if ( land[i][j] == 1 )
                 {
-                    maxX = i;
-                    maxY = j;
+                    maxX = 0;
+                    maxY = 0;
                     dfs(land,i,j);
                     list.add(new int[]{i,j,maxX,maxY});
                 }     
