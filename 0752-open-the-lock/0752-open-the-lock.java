@@ -1,43 +1,41 @@
 class Solution {
     public int openLock(String[] deadends, String target) {
-        int min = 0;
         Set<String> set = new HashSet();
-        for (String d : deadends)
+        for ( String d : deadends)
             set.add(d);
-        if ( set.contains("0000") ) return -1;
-        Queue<String[]> queue = new PriorityQueue<>( (a,b) -> Integer.valueOf(a[1]) - Integer.valueOf(b[1]));
-        queue.add(new String[]{"0000","0","0"});
-        int max = 0;
         
+        Queue<String> queue = new LinkedList();
+        queue.add("0000");
+        
+        int t = 0;
         while ( !queue.isEmpty() ) {
-            String[] p = queue.poll();
-            StringBuilder sb = new StringBuilder(p[0]);
-            String s = p[0];
-            int i = Integer.valueOf(p[2]);
-            if ( set.contains(s) || set.contains(i+" "+s) || i == sb.length()  ) continue;
-            if ( s.equals(target) ) 
-                return Integer.valueOf(p[1]);
-            // System.out.println(s+" "+p[1]+" "+p[2]);
-            set.add(i+" "+s);
-            char c = s.charAt(i);
-            queue.add(new String[]{p[0],p[1],String.valueOf(Integer.valueOf(p[2])+1)});
-            if ( c == '9' ) {
-                sb.setCharAt(i,'0');
-                queue.add(new String[]{sb.toString(),String.valueOf(Integer.valueOf(p[1])+1),"0"});
+            
+            int size = queue.size();
+            
+            for (int i=0;i<size;i++) {   
+                StringBuilder sb = new StringBuilder(queue.poll());
+                if ( set.contains(sb.toString())) continue;
+                if ( sb.toString().equals(target)) return t;
+                // System.out.println(sb.toString());
+                set.add(sb.toString());
                 
-                sb.setCharAt(i,'8');
-                queue.add(new String[]{sb.toString(),String.valueOf(Integer.valueOf(p[1])+1),"0"});           
+                for (int j=0;j<4;j++) {
+                char c = sb.charAt(j);
+                //up
+                sb.setCharAt(j, c=='9'?'0':(char)(c+1));
+                queue.add(sb.toString());
+                
+                //down
+                sb.setCharAt(j, c=='0'?'9':(char)(c-1));
+                queue.add(sb.toString());
+                
+                sb.setCharAt(j,c);
+                }
             }
-                else if ( c == '0' ) {
-                sb.setCharAt(i,'1');
-                                queue.add(new String[]{sb.toString(),String.valueOf(Integer.valueOf(p[1])+1),"0"});       sb.setCharAt(i,'9');
-                queue.add(new String[]{sb.toString(),String.valueOf(Integer.valueOf(p[1])+1),"0"});            }
-            else {
-                sb.setCharAt(i,(char)(c+1));                queue.add(new String[]{sb.toString(),String.valueOf(Integer.valueOf(p[1])+1),"0"});            
-                sb.setCharAt(i,(char)(c-1));
-                                queue.add(new String[]{sb.toString(),String.valueOf(Integer.valueOf(p[1])+1),"0"});
-            }
+            t++;
         }
+        
+        
         return -1;
     }
 }
