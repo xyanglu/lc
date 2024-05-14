@@ -1,5 +1,5 @@
 class Solution {
-    Map<String,Integer> map = new HashMap();
+    // Map<String,Integer> map = new HashMap();
     public int getMaximumGold(int[][] grid) {
         int max = 0;
         int n = grid.length;
@@ -23,7 +23,6 @@ class Solution {
         
         val += Math.max(down,Math.max(up,Math.max(left,right)));
         
-        map.put(i+" "+j,val);
-        return map.get(i+" "+j);
+        return val;
     }
 }
