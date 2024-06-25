@@ -14,17 +14,12 @@
  * }
  */
 class Solution {
-    int val = 0;
+    int pre = 0;
     public TreeNode bstToGst(TreeNode root) {
-        dfs(root);
+        if ( root == null ) return null;
+         bstToGst(root.right);
+        pre = root.val = pre + root.val;
+         bstToGst(root.left);
         return root;
-    }
-    void dfs(TreeNode root) {
-        if ( root == null ) return;
-        dfs(root.right);
-        int temp = root.val;
-        root.val += val;
-        val += temp;
-        dfs(root.left);
     }
 }
