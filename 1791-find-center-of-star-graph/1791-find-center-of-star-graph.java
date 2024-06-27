@@ -5,11 +5,10 @@ class Solution {
         {
             arr[e[0]]++;
             arr[e[1]]++;
+            
+            if ( arr[e[0]] == edges.length ) return e[0];
+            if ( arr[e[1]] == edges.length ) return e[1];
         }
-        for (int i=1;i<arr.length;i++)
-            if ( arr[i] == edges.length )
-                return i;
-        
         
         return -1;
     }
