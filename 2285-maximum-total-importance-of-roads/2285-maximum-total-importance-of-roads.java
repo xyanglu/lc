@@ -14,12 +14,9 @@ class Solution {
         
         Map<Integer,Integer> values = new HashMap();
         while ( !queue.isEmpty() )
-            values.put( queue.poll().getKey(), n-- );
+           rc += (long) queue.poll().getValue() * n--;
         
-        
-        for (int[] r : roads)
-            rc += values.get(r[0]) + values.get(r[1]);
-        
+
         return rc;
     }
 }
