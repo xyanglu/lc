@@ -33,7 +33,12 @@ class Solution {
                 b2 = true;
         }
         
-        if ( !(b1 && b2) ) return -1;
+        
+        //not and not
+        //   0 1
+        // 0 1 0
+        // 1 0 0
+        if ( !b1 || !b2 ) return -1;
         
         return rc;
     }
