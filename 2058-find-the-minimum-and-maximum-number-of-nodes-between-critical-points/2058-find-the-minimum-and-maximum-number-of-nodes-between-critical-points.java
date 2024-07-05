@@ -10,34 +10,38 @@
  */
 class Solution {
     public int[] nodesBetweenCriticalPoints(ListNode head) {
-        List<Integer> list = new ArrayList();
         ListNode prev = null;
         int j = 0;
+        int first = -1;
+        int min = Integer.MAX_VALUE;
+        int max = -1;
+        int p = -1;
         
         while ( head.next != null ) {
             if (prev!=null) {
-                if ( head.val < prev.val && head.val < head.next.val )
-                    list.add(j);
-                else if ( head.val > prev.val && head.val > head.next.val ) 
-                    list.add(j);
+                boolean match = false;
+                if ( head.val < prev.val && head.val < head.next.val ) {
+                    match = true;
+                }
+                else if ( head.val > prev.val && head.val > head.next.val ) {
+                    match = true;
+                }
+                if ( match ) {
+                    if ( p != -1 )
+                        min = Math.min(min,j-p);
+                    p = j;
+                    if ( first != -1 ) 
+                        max = Math.max(max,j - first);
+                    else if ( first == -1 )
+                        first = j;
+                }
+
+                    
             }
             prev = head;
             head = head.next;
             j++;
         }
-        
-        
-        
-        if ( list.size() < 2 ) 
-            return new int[]{-1,-1};
-        else {
-            int min = Integer.MAX_VALUE;
-            for (int i=0;i+1<list.size();i++)
-                min = Math.min( list.get(i+1)-list.get(i), min);
-            return new int[]{min, list.get(list.size()-1)-list.get(0)};
-            
-            
-        }
-        
+        return new int[]{min==Integer.MAX_VALUE?-1:min,max};
     }
 }
