@@ -10,7 +10,7 @@ class Solution:
             if directions[i] == "R":
                 stack.append(i)
             else:
-                while stack and directions[stack[-1]] == "R" and healths[i]:
+                while stack and healths[i]:
                     i2= stack.pop()
                     if healths[i] > healths[i2]:
                         healths[i2] = 0
