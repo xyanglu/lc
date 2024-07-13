@@ -22,8 +22,6 @@ class Solution:
                     else:
                         healths[i] = healths[i2] = 0;
                 
-                if healths[i]:
-                    stack.append(i)
                     
         return [h for h in healths if h > 0]
             
