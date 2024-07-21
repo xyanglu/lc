@@ -1,17 +1,17 @@
 import java.util.*;
 
 class Solution {
-    int k;
+    int k = 0;
     
     public int[][] buildMatrix(int k, int[][] rowConditions, int[][] colConditions) {
         this.k = k;
-        int[][] rc = new int[k][k];
-        
-        List<Integer> rowOrder = topoSort(rowConditions);
-        List<Integer> colOrder = topoSort(colConditions);
-        
-        if (rowOrder.size() != k || colOrder.size() != k)
-            return new int[0][0]; // Return an empty matrix if a valid topological sort is not possible
+        List<Integer> rowOrder = topologicalSort(rowConditions);
+        List<Integer> colOrder = topologicalSort(colConditions);
+
+        int[][] matrix = new int[k][k];
+        if (rowOrder.size() != k || colOrder.size() != k) {
+            return new int[0][0];
+        }
         
         int[] rowPos = new int[k + 1];
         int[] colPos = new int[k + 1];
@@ -22,48 +22,51 @@ class Solution {
         }
         
         for (int i = 1; i <= k; i++) {
-            rc[rowPos[i]][colPos[i]] = i;
+            int row = rowPos[i];
+            int col = colPos[i];
+            matrix[row][col] = i;
         }
         
-        return rc;
+        return matrix;
     }
     
-    List<Integer> topoSort(int[][] edges) {
-        Map<Integer, List<Integer>> graph = new HashMap<>();
+    private List<Integer> topologicalSort(int[][] conditions) {
+        Map<Integer, List<Integer>> adjList = new HashMap<>();
         int[] inDegree = new int[k + 1];
         
         for (int i = 1; i <= k; i++) {
-            graph.put(i, new ArrayList<>());
+            adjList.put(i, new ArrayList<>());
         }
         
-        for (int[] edge : edges) {
-            graph.get(edge[0]).add(edge[1]);
-            inDegree[edge[1]]++;
+        for (int[] condition : conditions) {
+            adjList.get(condition[0]).add(condition[1]);
+            inDegree[condition[1]]++;
         }
         
         Queue<Integer> queue = new LinkedList<>();
         for (int i = 1; i <= k; i++) {
             if (inDegree[i] == 0) {
-                queue.offer(i);
+                queue.add(i);
             }
         }
         
         List<Integer> order = new ArrayList<>();
         while (!queue.isEmpty()) {
-            int node = queue.poll();
-            order.add(node);
-            for (int neighbor : graph.get(node)) {
+            int curr = queue.poll();
+            order.add(curr);
+            
+            for (int neighbor : adjList.get(curr)) {
                 inDegree[neighbor]--;
                 if (inDegree[neighbor] == 0) {
-                    queue.offer(neighbor);
+                    queue.add(neighbor);
                 }
             }
         }
         
-        if (order.size() != k) {
-            return new ArrayList<>(); // Return empty list if topological sort is not possible
+        if (order.size() == k) {
+            return order;
         }
         
-        return order;
+        return new ArrayList<>();
     }
 }
