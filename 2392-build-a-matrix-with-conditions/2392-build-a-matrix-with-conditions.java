@@ -44,10 +44,8 @@ class Solution {
         boolean[] visited = new boolean[k + 1];
         boolean[] onPath = new boolean[k + 1];
         for (int i = 1; i <= k; i++) {
-            if (!visited[i]) {
-                if (!dfs(i, adjList, visited, onPath, order)) {
-                    return new ArrayList<>(); // Return an empty list if there's a cycle
-                }
+            if (!dfs(i, adjList, visited, onPath, order)) {
+                return new ArrayList<>(); // Return an empty list if there's a cycle
             }
         }
         
