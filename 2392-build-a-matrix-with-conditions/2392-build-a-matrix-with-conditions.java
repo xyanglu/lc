@@ -5,14 +5,14 @@ class Solution {
     
     public int[][] buildMatrix(int k, int[][] rowConditions, int[][] colConditions) {
         this.k = k;
-        List<Integer> rowOrder = topologicalSort(rowConditions);
-        List<Integer> colOrder = topologicalSort(colConditions);
-
-        int[][] matrix = new int[k][k];
+        List<Integer> rowOrder = topologicalSortDFS(rowConditions);
+        List<Integer> colOrder = topologicalSortDFS(colConditions);
+        
         if (rowOrder.size() != k || colOrder.size() != k) {
-            return new int[0][0];
+            return new int[0][0]; // Return an empty matrix if there's a cycle
         }
         
+        int[][] matrix = new int[k][k];
         int[] rowPos = new int[k + 1];
         int[] colPos = new int[k + 1];
         
@@ -30,43 +30,50 @@ class Solution {
         return matrix;
     }
     
-    private List<Integer> topologicalSort(int[][] conditions) {
+    private List<Integer> topologicalSortDFS(int[][] conditions) {
         Map<Integer, List<Integer>> adjList = new HashMap<>();
-        int[] inDegree = new int[k + 1];
-        
         for (int i = 1; i <= k; i++) {
             adjList.put(i, new ArrayList<>());
         }
         
         for (int[] condition : conditions) {
             adjList.get(condition[0]).add(condition[1]);
-            inDegree[condition[1]]++;
-        }
-        
-        Queue<Integer> queue = new LinkedList<>();
-        for (int i = 1; i <= k; i++) {
-            if (inDegree[i] == 0) {
-                queue.add(i);
-            }
         }
         
         List<Integer> order = new ArrayList<>();
-        while (!queue.isEmpty()) {
-            int curr = queue.poll();
-            order.add(curr);
-            
-            for (int neighbor : adjList.get(curr)) {
-                inDegree[neighbor]--;
-                if (inDegree[neighbor] == 0) {
-                    queue.add(neighbor);
+        boolean[] visited = new boolean[k + 1];
+        boolean[] onPath = new boolean[k + 1];
+        for (int i = 1; i <= k; i++) {
+            if (!visited[i]) {
+                if (!dfs(i, adjList, visited, onPath, order)) {
+                    return new ArrayList<>(); // Return an empty list if there's a cycle
                 }
             }
         }
         
-        if (order.size() == k) {
-            return order;
+        Collections.reverse(order);
+        return order;
+    }
+    
+    private boolean dfs(int node, Map<Integer, List<Integer>> adjList, boolean[] visited, boolean[] onPath, List<Integer> order) {
+        if (onPath[node]) {
+            return false; // Detected a cycle
+        }
+        if (visited[node]) {
+            return true;
         }
         
-        return new ArrayList<>();
+        visited[node] = true;
+        onPath[node] = true;
+        for (int neighbor : adjList.get(node)) {
+            if (!dfs(neighbor, adjList, visited, onPath, order)) {
+                return false;
+            }
+        }
+        onPath[node] = false;
+        order.add(node);
+        
+        return true;
     }
+    
 }
