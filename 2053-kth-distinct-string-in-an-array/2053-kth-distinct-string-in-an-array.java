@@ -1,19 +1,21 @@
 class Solution {
     public String kthDistinct(String[] arr, int k) {
-        Set<String> set = new LinkedHashSet();
-        Set<String> seen = new HashSet();
-        for ( String s : arr) {
-            if ( set.contains(s) || seen.contains(s) ) {
-                set.remove(s);
-                seen.add(s);
-                continue;
+        List<String> list = new ArrayList();
+        Map<String,Integer> map = new HashMap();
+        for (String s : arr)
+        {
+            if ( map.getOrDefault(s,0)>0  ) 
+                map.put(s,map.get(s)+1);
+            else {
+                list.add(s);
+                map.put(s,1);
             }
-            set.add(s);
         }
-        if ( set.size() < k ) return "";
-        for (String s : set)
-            if ( k-- == 1 )
-                return s;
+        for ( String s: list) {
+            if ( map.get(s) == 1 )
+                if ( k-- == 1 )
+                    return s;
+        }
         return "";
     }
 }
