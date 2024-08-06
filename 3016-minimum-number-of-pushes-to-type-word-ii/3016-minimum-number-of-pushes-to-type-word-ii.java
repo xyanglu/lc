@@ -13,16 +13,13 @@ class Solution {
         
         while ( !queue.isEmpty() ) {
             char c = queue.peek().getKey();
-            if ( !map.containsKey(c) ) {
-                if ( used == 8 ) {
-                    cur++;
-                    used = 0;
-                }
-                map.put(c,cur);
-                // System.out.println(c+" "+cur);
-                used++;
+            if ( used == 8 ) {
+                cur++;
+                used = 0;
             }
-            res += map.get(c) * queue.poll().getValue();
+            used++;
+            
+            res += cur * queue.poll().getValue();
         }
         return res;
     }
