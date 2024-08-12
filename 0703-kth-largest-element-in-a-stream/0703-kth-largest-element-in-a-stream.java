@@ -3,10 +3,10 @@ class KthLargest {
     List<Integer> list = new ArrayList();
     int k = 0;
     public KthLargest(int k, int[] nums) {
+                this.k = k;
+
         for (int num : nums)
-        list.add(num);
-        Collections.sort(list,Collections.reverseOrder());
-        this.k = k;
+            add(num);
     }
     
     public int add(int val) {
@@ -23,11 +23,13 @@ class KthLargest {
             }
             else {
                 l = m+1;
-                prev = l;
+                prev = m+1;
             }
         }
         
         list.add(prev,val);
+        if ( list.size() < k )
+            return -1;    
         return list.get(k-1);
         
     }
