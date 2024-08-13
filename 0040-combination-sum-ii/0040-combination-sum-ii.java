@@ -6,11 +6,12 @@ class Solution {
         return new ArrayList(list);
     }
     void dfs(Set<List<Integer>> list, int[] c, int target, List<Integer> temp, int i) {
-        if ( target < 0) return;
+        if ( target < 0 ) return;
         if ( target == 0 ) {
             list.add(new ArrayList(temp));
             return;
         }
+        if ( i == c.length || c[i] > target ) return;
         int j = i;
         for (i=i;i<c.length;i++)
         {
