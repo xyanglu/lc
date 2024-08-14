@@ -13,7 +13,7 @@ class Solution:
     
         l,r=0,max(nums)
         while l < r:
-            m = l + ((r-l)//2);
+            m = (l+r)//2;
             pairs = helper(m)
             if pairs >= k:
                 r = m
