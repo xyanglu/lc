@@ -22,10 +22,11 @@ class Solution {
                 head = head.next;
                 continue;
             }
-            node.next = new ListNode(head.val);
+            node.next = head;
             node = node.next;
             head = head.next;
         }
+        node.next = null;
         
         
         return v.next;
