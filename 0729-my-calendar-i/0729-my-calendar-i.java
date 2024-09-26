@@ -22,8 +22,6 @@ class MyCalendar {
         }
         Node node = root;
         while (true) {
-            if (!( end <= node.start || start >= node.end ))
-                return false;
             if ( end <= node.start && node.left != null ) {
                 node = node.left;
                 continue;
@@ -32,6 +30,8 @@ class MyCalendar {
                 node = node.right;
                 continue;
             }
+            if (!( end <= node.start || start >= node.end ))
+                return false;
             if ( end <= node.start && node.left == null ) {
                 Node temp = new Node();
                 temp.start = start;
