@@ -1,21 +1,54 @@
 class MyCalendar {
 
-    List<List<Integer>> list = new ArrayList();
+    class Node {
+        Node left = null;
+        Node right = null;
+        int start = 0;
+        int end = 0;
+    }
+    
+    Node root = null;
     public MyCalendar() {
         
     }
     
     public boolean book(int start, int end) {
-        List<Integer> temp = new ArrayList();
-        temp.add(start);
-        temp.add(end);
-        
-        for (List<Integer> l : list)
-            if (!( end<=l.get(0) || l.get(1)<=start ))
+        if ( root == null ) 
+        {
+            root = new Node();
+            root.start = start;
+            root.end = end;
+            return true;
+        }
+        Node node = root;
+        while (true) {
+            if (!( end <= node.start || start >= node.end ))
                 return false;
+            if ( end <= node.start && node.left != null ) {
+                node = node.left;
+                continue;
+            }
+            if ( start >= node.end && node.right != null ) {
+                node = node.right;
+                continue;
+            }
+            if ( end <= node.start && node.left == null ) {
+                Node temp = new Node();
+                temp.start = start;
+                temp.end = end;
+                node.left = temp;
+                return true;
+            }
+            if ( start >= node.end && node.right == null ) {
+                Node temp = new Node();
+                temp.start = start;
+                temp.end = end;
+                node.right = temp;
+                return true;
+            }
+            
+        }
         
-        list.add(temp);
-        return true;
         
     }
 }
