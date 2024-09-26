@@ -22,29 +22,28 @@ class MyCalendar {
         }
         Node node = root;
         while (true) {
-            if ( end <= node.start && node.left != null ) {
+            if ( end <= node.start ) {
+                if ( node.left == null ) {
+                    Node temp = new Node();
+                    temp.start = start;
+                    temp.end = end;
+                    node.left = temp;
+                    return true;
+                }
                 node = node.left;
-                continue;
             }
-            if ( start >= node.end && node.right != null ) {
+            else if ( start >= node.end ) {
+                if ( node.right == null ) {
+                    Node temp = new Node();
+                    temp.start = start;
+                    temp.end = end;
+                    node.right = temp;
+                    return true;
+                }
                 node = node.right;
-                continue;
             }
-            if ( end <= node.start && node.left == null ) {
-                Node temp = new Node();
-                temp.start = start;
-                temp.end = end;
-                node.left = temp;
-                return true;
-            }
-            if ( start >= node.end && node.right == null ) {
-                Node temp = new Node();
-                temp.start = start;
-                temp.end = end;
-                node.right = temp;
-                return true;
-            }
-            return false;
+            else
+                return false;
         }
         
         
