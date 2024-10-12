@@ -1,7 +1,7 @@
 class Solution {
     public int minGroups(int[][] intervals) {
-        Queue<Integer> q1 = new PriorityQueue();
-        Queue<Integer> q2 = new PriorityQueue();
+        List<Integer> q1 = new ArrayList();
+        List<Integer> q2 = new ArrayList();
         
         for (int[] i : intervals)
         {
@@ -9,16 +9,19 @@ class Solution {
             q2.add(i[1]);
         }
         
+        Collections.sort(q1);
+        Collections.sort(q2);
+        
+        int i = 0, j =0;
         int rc = 0;
-        int prev = 0;
-        while ( !q1.isEmpty() ) {
-            int q = q1.poll();
-            while ( !q2.isEmpty() && q2.peek() < q ) { 
-                q2.poll();
-                prev--;
-            }
-            prev++;
-            rc = Math.max(rc,prev);
+        while ( i < q1.size() ) {
+
+            if ( q1.get(i) <= q2.get(j) )
+                i++;
+            else
+                j++;
+            
+            rc = Math.max(rc,i - j);
             
         }
         
