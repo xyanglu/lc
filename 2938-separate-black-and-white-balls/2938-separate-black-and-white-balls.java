@@ -3,9 +3,9 @@ class Solution {
         long rc = 0;
         int n =s.length();
         long count = 0;
-        for (int i=n-1;i>=0;i--) {
+        for (int i=0;i<n;i++) {
             char c = s.charAt(i);
-            if ( c == '0' ) 
+            if ( c == '1' ) 
                 count++;
             else
                 rc += count;
