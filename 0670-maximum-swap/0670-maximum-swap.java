@@ -3,9 +3,9 @@ class Solution {
         StringBuilder sb = new StringBuilder( String.valueOf(num) );
         Map<Character,Integer> map = new HashMap();
         int n = sb.length();
-        for (int i=n-1;i>0&&map.size()<10;i--) {
+        for (int i=n-1;i>0&&map.size()<9;i--) {
             char c = sb.charAt(i);
-            if ( !map.containsKey(c) )
+            if ( !map.containsKey(c) && c >= '1' )
                 map.put(c,i);
         }
         Queue<Map.Entry<Character,Integer>> queue = new PriorityQueue<>( (a,b) -> b.getKey() - a.getKey());
