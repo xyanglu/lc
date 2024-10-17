@@ -1,29 +1,31 @@
 class Solution {
     public int maximumSwap(int num) {
-        StringBuilder sb = new StringBuilder( String.valueOf(num) );
-        Map<Character,Integer> map = new HashMap();
+        StringBuilder sb = new StringBuilder ( String.valueOf(num));
         int n = sb.length();
-        for (int i=n-1;i>0&&map.size()<9;i--) {
+        int[][] rc = new int[n][2];
+        int max = 0;
+        int coord = 0;
+        for ( int i=n-1;i>=0;i--) {
             char c = sb.charAt(i);
-            if ( !map.containsKey(c) && c >= '1' )
-                map.put(c,i);
+            if ( c - '0' > max ) {
+                coord = i;
+                max = c-'0';
+            }
+            rc[i] = new int[]{ max, coord};
         }
-        Queue<Map.Entry<Character,Integer>> queue = new PriorityQueue<>( (a,b) -> b.getKey() - a.getKey());
-        queue.addAll(map.entrySet());
         
-        for (int i=0;i<n;i++) {
+        for ( int i=0;i<n;i++) {
             char c = sb.charAt(i);
-            while ( !queue.isEmpty() && i >= queue.peek().getValue() )
-                queue.poll();
-            
-            if ( !queue.isEmpty() && c < queue.peek().getKey() )
+            if ( rc[i][0] > c - '0' )
             {
-                sb.setCharAt( i , queue.peek().getKey() );
-                sb.setCharAt( queue.peek().getValue(), c);
+                sb.setCharAt(i, (char) (rc[i][0]+'0'));
+                sb.setCharAt(rc[i][1], c);
                 break;
             }
         }
         
-        return Integer.parseInt( sb.toString() );
+        
+        
+        return Integer.parseInt( sb.toString() ) ;
     }
 }
