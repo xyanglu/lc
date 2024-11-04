@@ -1,13 +1,13 @@
 class Solution {
     public String compressedString(String word) {
         StringBuilder sb = new StringBuilder();
-        
-        while (  word.length() != 0 ) {
-            char c = word.charAt(0);
+        int j = 0;
+        while (  j < word.length() ) {
+            char c = word.charAt(j);
             int len = 1;
-            while ( len < 9 && len < word.length() && word.charAt(len) == c ) len++;
+            while ( len < 9 && len + j < word.length() && word.charAt(len+j) == c ) len++;
             sb.append(len+""+c);
-            word = word.substring(len,word.length());
+            j+=len;
         }
         
         return sb.toString();
