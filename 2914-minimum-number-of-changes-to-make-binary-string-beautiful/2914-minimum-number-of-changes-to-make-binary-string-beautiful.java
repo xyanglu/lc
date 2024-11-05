@@ -1,6 +1,5 @@
 class Solution {
     public int minChanges(String s) {
-        int[] arr = new int[2];
         int rc = 0;
         int prev = 0;
         
@@ -17,7 +16,6 @@ class Solution {
                     rc++;
                 }
             }
-            arr[cur]++;
             prev = c-'0';
         }
         
