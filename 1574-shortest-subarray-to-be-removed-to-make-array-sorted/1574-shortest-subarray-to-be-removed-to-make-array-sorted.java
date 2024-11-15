@@ -10,17 +10,11 @@ class Solution {
         
         int res = r;
         
-        //suffix
+        //postfix
         
         int l = 0;
-        while ( l + 1 < n && arr[l] <= arr[l+1] )
-            l++;
-        
-        res = Math.min(res,n-1-l);
         
         //midarray
-        
-        l = 0;
         r = n-1;
         
         while (l<r) {
