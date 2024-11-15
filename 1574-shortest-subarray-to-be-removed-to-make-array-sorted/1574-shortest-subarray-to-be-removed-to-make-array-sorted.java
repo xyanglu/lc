@@ -12,18 +12,10 @@ class Solution {
         
         //postfix
         
-        int l = 0;
-        
-        //midarray
-        r = n-1;
-        
-        while (l<r) {
-            while ( r < n && l +1 < r && arr[r-1] <= arr[r] && arr[l] <= arr[r] )
-                r--;
-            
+        int l = 0;       
+        while (l<r) {            
             while ( r < n && arr[l] > arr[r] )
-                r++;
-            
+                r++;     
             res = Math.min(res,r-l-1);
             if ( arr[l] > arr[l+1] ) break;
             l++;
